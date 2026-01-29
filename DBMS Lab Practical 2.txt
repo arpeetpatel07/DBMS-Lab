@@ -489,4 +489,42 @@ TO DELETE TUPLE:
 delete from table where condition;
 
 
+29/07/2026
+
+
+8. To create a sequence:-
+	create sequence emp_seq start with 1 increment by 1;
+
+9. Now create a table:-
+	create table emp (emp_id int primary key, name varchar2(20), mobile int);
+
+insert these values:
+
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz0', 8789565412);
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz1', 8789565412); 
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz2', 8789565412); 
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz3', 8789565412); 
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz4', 8789565412); 
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz5', 8789565412); 
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz6', 8789565412); 
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz7', 8789565412); 
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz8', 8789565412); 
+	insert into emp (emp_id, name, mobile) values (emp_seq.nextval, 'xyz9', 8789565412); 
+
+
+	select max(emp_id) from emp;
+
+10. To rename the table:-
+	rename emp to employee;
+
+11. To rename the field:-
+	alter table employee rename column mobile to mobilenumber;
+
+12. To delete data of the table:-
+	truncate table employee;
+
+13. To add new column as pincode:-
+	alter table employee add pincode number not null;
+
+
 
