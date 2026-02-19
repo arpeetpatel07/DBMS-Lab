@@ -1,0 +1,121 @@
+Experiment No. 6
+
+Aim:  To study PL/SQL Procedure and write procedures for:
+i.	Swapping of two numbers without using third variable,
+ii.	Largest amongst three numbers.
+iii.	Area of circle by radius as an argument.
+
+Solution:
+
+1. Swapping Two Numbers Without Using a Third Variable Procedure Creation:
+
+Create the Stored Procedure
+Create the stored procedure by entering the PL/SQL code directly in the SQLPlus CLI.
+
+CREATE OR REPLACE PROCEDURE SwapNumbers (
+    num1 IN OUT NUMBER,
+    num2 IN OUT NUMBER
+) AS
+BEGIN
+    num1 := num1 + num2;
+    num2 := num1 - num2;
+    num1 := num1 - num2;
+END;
+/
+**Note: Ensure you include the / after the END; to execute the procedure creation.
+
+Call the Stored Procedure
+Call the stored procedure in an anonymous PL/SQL block from the CLI
+
+DECLARE
+    a NUMBER := 10;
+    b NUMBER := 20;
+BEGIN
+    SwapNumbers(a, b);
+    DBMS_OUTPUT.PUT_LINE('After Swap: a = ' || a || ', b = ' || b);
+END;
+/
+
+Enable Output in SQLPlus, before you can see the output of DBMS_OUTPUT.PUT_LINE, you need to enable the server output in SQLPlus
+SET SERVEROUTPUT ON
+
+Call the procedure directly in SQLPlus or a similar tool:
+
+EXEC SwapNumbers(10, 20);
+
+
+Explanation:
+•	The procedure is called within an anonymous PL/SQL block.
+•	The variables a and b are passed as IN OUT parameters, meaning their values are modified by the procedure.
+•	DBMS_OUTPUT.PUT_LINE is used to print the output.
+
+
+
+2. Finding the Largest Amongst Three Numbers Procedure Creation:
+
+CREATE OR REPLACE PROCEDURE FindLargest (
+    num1 IN NUMBER,
+    num2 IN NUMBER,
+    num3 IN NUMBER,
+    largest OUT NUMBER
+) AS
+BEGIN
+    IF num1 >= num2 AND num1 >= num3 THEN
+        largest := num1;
+    ELSIF num2 >= num1 AND num2 >= num3 THEN
+        largest := num2;
+    ELSE
+        largest := num3;
+    END IF;
+END;
+/
+
+Execution Example:
+DECLARE
+    x NUMBER := 15;
+    y NUMBER := 25;
+    z NUMBER := 10;
+    maxVal NUMBER;
+BEGIN
+    FindLargest(x, y, z, maxVal);
+    DBMS_OUTPUT.PUT_LINE('Largest Value: ' || maxVal);
+END;
+/
+
+
+
+Explanation:
+•	maxVal is used as an OUT parameter to receive the largest number.
+•	The procedure is called, and the result is displayed using DBMS_OUTPUT.PUT_LINE.
+ 
+
+
+3. Calculating the Area of a Circle Given the Radius Procedure Creation:
+CREATE OR REPLACE PROCEDURE CalculateArea (
+    radius IN NUMBER,
+    area OUT NUMBER
+) AS
+BEGIN
+    area := 3.14159 * radius * radius;
+END;
+/
+
+Execution Example:
+DECLARE
+    r NUMBER := 5;
+    areaCircle NUMBER;
+BEGIN
+    CalculateArea(r, areaCircle);
+    DBMS_OUTPUT.PUT_LINE('Area of Circle: ' || areaCircle);
+END;
+/
+
+Explanation:
+•	The radius (r) is passed to the procedure, and the calculated area is returned in areaCircle.
+•	The procedure is called, and the area of the circle is printed.
+
+Outcome:
+
+    Procedure Creation Queries: These queries define the PL/SQL procedures (SwapNumbers, FindLargest, and CalculateArea) that perform the required operations.
+
+    Execution Queries: These anonymous PL/SQL blocks demonstrate how to call each procedure, passing in appropriate values and printing the results using DBMS_OUTPUT.PUT_LINE.
