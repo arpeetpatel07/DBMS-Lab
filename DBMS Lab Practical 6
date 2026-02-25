@@ -10,7 +10,9 @@ Solution:
 1. Swapping Two Numbers Without Using a Third Variable Procedure Creation:
 
 Create the Stored Procedure
-Create the stored procedure by entering the PL/SQL code directly in the SQLPlus CLI.
+Create the stored procedure by entering the PL/SQL code directly in the SQLPlus CLI.:
+
+
 
 CREATE OR REPLACE PROCEDURE SwapNumbers (
     num1 IN OUT NUMBER,
@@ -22,10 +24,13 @@ BEGIN
     num1 := num1 - num2;
 END;
 /
+
 **Note: Ensure you include the / after the END; to execute the procedure creation.
 
 Call the Stored Procedure
-Call the stored procedure in an anonymous PL/SQL block from the CLI
+Call the stored procedure in an anonymous PL/SQL block from the CLI:
+
+
 
 DECLARE
     a NUMBER := 10;
@@ -36,10 +41,13 @@ BEGIN
 END;
 /
 
+
 Enable Output in SQLPlus, before you can see the output of DBMS_OUTPUT.PUT_LINE, you need to enable the server output in SQLPlus
 SET SERVEROUTPUT ON
 
 Call the procedure directly in SQLPlus or a similar tool:
+
+
 
 EXEC SwapNumbers(10, 20);
 
@@ -52,6 +60,8 @@ Explanation:
 
 
 2. Finding the Largest Amongst Three Numbers Procedure Creation:
+
+
 
 CREATE OR REPLACE PROCEDURE FindLargest (
     num1 IN NUMBER,
@@ -70,7 +80,10 @@ BEGIN
 END;
 /
 
+
 Execution Example:
+
+
 DECLARE
     x NUMBER := 15;
     y NUMBER := 25;
@@ -91,6 +104,8 @@ Explanation:
 
 
 3. Calculating the Area of a Circle Given the Radius Procedure Creation:
+
+
 CREATE OR REPLACE PROCEDURE CalculateArea (
     radius IN NUMBER,
     area OUT NUMBER
@@ -100,7 +115,10 @@ BEGIN
 END;
 /
 
+
 Execution Example:
+
+
 DECLARE
     r NUMBER := 5;
     areaCircle NUMBER;
@@ -109,6 +127,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Area of Circle: ' || areaCircle);
 END;
 /
+
 
 Explanation:
 •	The radius (r) is passed to the procedure, and the calculated area is returned in areaCircle.
