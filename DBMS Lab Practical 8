@@ -1,0 +1,61 @@
+Experiment 8
+
+Aim: Consider an examination system. It will accept the marks of 4 subjects. Write procedure which will find the total and average of 4 subjects and display the grade.
+
+Solution:
+CREATE OR REPLACE PROCEDURE Sub_Avg (
+    cn IN INT, 
+    dbms IN INT, 
+    ifds IN INT, 
+    cmbs IN INT
+) AS
+    total INT;
+    per NUMBER(5,2)
+
+BEGIN
+    total := cn + dbms + ifds + cmbs;
+    per := (total / 400) * 100;
+    
+    IF cn < 40 OR dbms < 40 OR ifds < 40 OR cmbs < 40 THEN
+        DBMS_OUTPUT.PUT_LINE('FAIL');
+    ELSE
+        IF per > 75 THEN
+            DBMS_OUTPUT.PUT_LINE('GRADE A'); 
+        ELSIF per > 65 AND per <= 75 THEN
+            DBMS_OUTPUT.PUT_LINE('GRADE B'); 
+        ELSIF per > 55 AND per <= 65 THEN
+            DBMS_OUTPUT.PUT_LINE('GRADE C');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('GRADE D');
+        END IF;
+        
+        DBMS_OUTPUT.PUT_LINE('PERCENTAGE IS ' || per);
+    END IF;
+END;
+/
+
+
+
+Explanation:
+•	Procedure Name: Sub_Avg
+•	Parameters: Accepts marks for 4 subjects (cn, dbms, ifds, cmbs).
+
+
+•	Calculations:
+o	Total: Sum of all subject marks.
+o	Percentage: (total / 400) * 100
+•	Grade Determination:
+o	FAIL if any mark is below 40.
+o	GRADE A for percentage > 75.
+o	GRADE B for 65 < percentage <= 75.
+o	GRADE C for 55 < percentage <= 65.
+o	GRADE D for percentage <= 55.
+•	Output: Displays grade and percentage.
+
+Outcome:
+Students will learn to - 
+Create Procedures: Write and implement PL/SQL procedures for processing and analyzing data.
+Perform Calculations: Calculate total marks, percentage, and derive grades based on criteria.
+Conditional Logic: Apply conditional statements (`IF`, `ELSIF`) to determine results.
+Handle Inputs: Accept and process multiple inputs in procedures.
+Display Results: Use `DBMS_OUTPUT.PUT_LINE` to output results and feedback.
