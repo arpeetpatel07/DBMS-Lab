@@ -1,0 +1,61 @@
+Experiment No. 7
+
+Aim: To study Control loops in PL/SQL
+i.	Sum of first 10 numbers using while loop.
+ii.	Sum of first 10 even numbers using for loop.
+
+Solution:
+
+1. Sum of First 10 Numbers Using a WHILE Loop
+Procedure Creation:
+
+CREATE OR REPLACE PROCEDURE SumFirst10Numbers_WhileLoop AS
+    i NUMBER := 1;
+    sum1 NUMBER := 0;
+BEGIN
+    WHILE i <= 10 LOOP
+        sum1 := sum1 + i;
+        i := i + 1;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('Sum of first 10 numbers using WHILE loop: ' || sum1);
+END;
+/
+
+2. Sum of First 10 Even Numbers Using a FOR Loop
+Procedure Creation:
+
+CREATE OR REPLACE PROCEDURE SumFirst10EvenNumbers_ForLoop AS
+    sum1 NUMBER := 0;
+BEGIN
+    FOR i IN 1..10 LOOP
+        sum1 := sum1 + (2 * i);
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('Sum of first 10 even numbers using FOR loop: ' || sum1);
+END;
+/
+
+
+Execution Example:
+
+Call the Procedures in PL/SQL Block:
+
+    BEGIN
+        SumFirst10Numbers_WhileLoop;
+    END;
+    /
+
+    BEGIN
+        SumFirst10EvenNumbers_ForLoop;
+    END;
+    /
+Directly in SQLPlus or a similar tool:
+
+EXEC SumFirst10Numbers_WhileLoop;
+
+Outcome:
+
+•	Use WHILE and FOR loops in PL/SQL.
+•	Solve repetitive tasks like summing numbers.
+•	Handle variables within loops.
+•	Differentiate between WHILE and FOR loop mechanics.
+•	Display results with DBMS_OUTPUT.PUT_LINE.
