@@ -1,0 +1,70 @@
+Experiment 10
+
+Aim: Write a PL\SQL procedure to demonstrate the use of Exceptions. 
+
+
+Solution:
+CREATE OR REPLACE PROCEDURE exception_procedure(e emp.empno%TYPE) AS
+    low_range_exception EXCEPTION;
+    more_range_exception EXCEPTION;
+    employeename emp.ename%TYPE;
+BEGIN
+    IF e <= 0 THEN
+        RAISE low_range_exception;
+    ELSIF e >= 8000 THEN
+        RAISE more_range_exception;
+    ELSE
+        SELECT ename INTO employeename FROM emp WHERE empno = e;
+        DBMS_OUTPUT.PUT_LINE(employeename);
+    END IF;
+    
+    EXCEPTION
+        WHEN no_data_found THEN
+            DBMS_OUTPUT.PUT_LINE('No such item available');
+        WHEN low_range_exception THEN
+            DBMS_OUTPUT.PUT_LINE('Employee ID is too small!');
+        WHEN more_range_exception THEN
+            DBMS_OUTPUT.PUT_LINE('Employee ID is too big!');
+END;
+/
+Explanation:
+o	The exception_procedure takes an employee number (e) as input.
+o	It raises custom exceptions if the employee number is out of a certain range:
+	If e is less than or equal to 0, it raises a low_range_exception.
+	If e is greater than or equal to 8000, it raises a more_range_exception.
+o	If the employee number is valid, it retrieves the employee name.
+o	The procedure handles different exceptions:
+	no_data_found handles the case when no employee is found.
+	low_range_exception and more_range_exception display custom messages.
+
+Outcome:
+This practical teaches students how to manage and handle exceptions in PL/SQL, ensuring robust error handling in their code.
+
+
+
+
+
+1. CREATE OR REPLACE PROCEDURE ndf (n IN NUMBER)
+AS
+    vname   employees.emp_name%TYPE;
+    vsalary employees.salary%TYPE;
+BEGIN
+    SELECT emp_name, salary
+    INTO vname, vsalary
+    FROM employees
+    WHERE emp_id = n;
+
+    DBMS_OUTPUT.PUT_LINE('Name = ' || vname || ', Salary = ' || vsalary);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('emp_id = ' || n || ' not found');
+END;
+/
+
+2. SET SERVEROUTPUT ON
+
+3. exec ndf(8);
+
+4. SQL> exec ndf(18);
+
