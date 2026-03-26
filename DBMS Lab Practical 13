@@ -29,7 +29,11 @@ Outcome: This practical demonstrates the difference between row-level and statem
 
 
 
-1. CREATE OR REPLACE TRIGGER st_info_trigger
+1.  select * from St_info;
+
+
+
+2. CREATE OR REPLACE TRIGGER tri_upd
 AFTER UPDATE ON St_info
 BEGIN
     DBMS_OUTPUT.PUT_LINE('This is statement level trigger fired');
@@ -37,7 +41,29 @@ END;
 /
 
 
-2. SET SERVEROUTPUT ON
+3. SET SERVEROUTPUT ON
 
 
-3.  update St_info set SUB1=SUB1-10;
+4. update St_info set SUB1=SUB1-10;
+
+
+5. drop Trigger tri_upd;
+
+
+6.  CREATE OR REPLACE TRIGGER tri_upd2
+AFTER UPDATE ON St_info for each row
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('This is row level trigger fired');
+END;
+/
+
+7.  desc st_info
+
+
+8. select roll, sub1 from st_info;
+
+
+9. update St_info set SUB1=Sub2+10 where SUB1 > 60;
+
+
+10.
