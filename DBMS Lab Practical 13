@@ -26,3 +26,18 @@ o	It displays a message when the trigger is activated.
 o	Another trig_upt_student trigger is a row-level trigger that fires before each row is updated in the student table.
 o	It displays a message for each row that is affected by the UPDATE statement.
 Outcome: This practical demonstrates the difference between row-level and statement-level triggers, teaching students how to use each type effectively.
+
+
+
+1. CREATE OR REPLACE TRIGGER st_info_trigger
+AFTER UPDATE ON St_info
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('This is statement level trigger fired');
+END;
+/
+
+
+2. SET SERVEROUTPUT ON
+
+
+3.  update St_info set SUB1=SUB1-10;
