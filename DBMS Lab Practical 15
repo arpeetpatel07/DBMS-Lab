@@ -1,87 +1,85 @@
-create or replace procedure to_month
-
+create or replace procedure to_mnth
 as
-
-v_month varchar2(5);
-
-begin
-
-v_month: to_char(sysdate, 'MON');
-
-dbms_output.put_line('the current month is || v_month);
-
-end;
-
-/
-
-create or replace procedure to month
-
-as
-
 v_month varchar2(10);
-
 begin
-
-v month: to char(sysdate, MONTH);
-
+v_month:=to_char(sysdate, 'mon');
+dbms_output.put_line('the current month is ' || v_month);
 end;
+/
+set serveroutput on
+exec to_mnth;
+output: the current month is mar
 
-### day is display only 3 char 1.e. tue, mon etc
 
-create or replace procedure to_DAY
-
+create or replace procedure to_mnth
 as
-
-v_day varchar2(10);
-
+v_month varchar2(10);
 begin
-
-v_day: to_char(sysdate, 'dy');
-
-dbms_output.put_line('the current month is || v_day);
-
+v_month:=upper(to_char(sysdate, 'month'));
+dbms_output.put_line('the current month is ' || v_month);
 end;
+/
+set serveroutput on
+exec to_mnth;
+output: the current month is MARCH
 
-design a trigger such that no insertion or updation is done on sat or sun (for practice you create trigger for wed)
 
-dbms_output.put_line('the current month is || v_month);
+create or replace procedure to_mnth
+as
+v_month varchar2(10);
+begin
+v_month:=upper(to_char(sysdate, 'day'));
+dbms_output.put_line('the current day is ' || v_month);
+end;
+/
+set serveroutput on
+exec to_mnth;
+output: the current day is TUESDAY
+
+
+create or replace procedure to_mnth
+as
+v_month varchar2(10);
+begin
+v_month:=upper(to_char(sysdate, 'dy'));
+dbms_output.put_line('the current day is ' || v_month);
+end;
+/
+set serveroutput on
+exec to_mnth;
+output: the current day is TUE
 
 end;
 
 /
 
-#### complete day is display like monday, tuesday, etc
 
-create or replace procedure to_DAY
-
-as
-
-v_day varchar2(10);
-
-begin
-
-v_day := to_char(sysdate, 'day');
-
-dbms_output.put_line('the current month is || v_day);
-
-end;
-
+# Design a trigger to stop insertion or updation in the table for the days like sat or sun of any date ( for practice purpose take the day as 'tue')
+Shortcut -> CREATE OR REPLACE TRIGGER no_ins_upd
+(AS) declare
+    v_day VARCHAR2(10);
+BEGIN
+    v_day :=TO_CHAR(SYSDATE, 'DAY');
+    IF v_day = 'TUESDAY' THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Insertion or Updation is not allowed on ' || v_day);
+    END IF;
+END;
 /
 
-### day is display only 3 cha
 
-create or replace procedure to_DAY
-
-as
-
-v_day varchar2(10);
-
-begin
-
-v_day := to_char(sysdate, 'dy');
-
-dbms_output.put_line('the current month is || v_day);
-
-end;
-
+#Actual code
+CREATE OR REPLACE TRIGGER check_day
+BEFORE INSERT OR UPDATE ON emp2
+FOR EACH ROW
+DECLARE
+ v_day VARCHAR2(10);
+ BEGIN
+ v_day := UPPER(TRIM(TO_CHAR(SYSDATE, 'DAY')));
+IF v_day = 'TUESDAY' THEN
+RAISE_APPLICATION_ERROR(-20001,'Insertion or Updation is not allowed on Tuesday');
+END IF;
+END;
 /
+INSERT INTO emp2 VALUES (11, 'aaa', 2, 45000);
+#OUTPUT
+Insertion or Updation is not allowed on Tuesday
